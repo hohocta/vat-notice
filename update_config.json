@@ -1,0 +1,13 @@
+{
+  "owner": "hohocta",
+  "repo": "vat-notice",
+  "branch": "main",
+  "files": [
+    "app.py",
+    "ui.html",
+    "report_gen.py",
+    "app_icon.ico",
+    "updater.py",
+    "update_config.json"
+  ]
+}
