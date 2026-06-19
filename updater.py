@@ -8,6 +8,7 @@
 흐름: 안내문작성.bat 이 app.py 보다 먼저 이 파일을 실행합니다.
 """
 import json
+import time
 import urllib.parse
 import urllib.request
 from datetime import datetime
@@ -29,7 +30,11 @@ def log(msg):
 
 
 def fetch(url, binary=False):
-    req = urllib.request.Request(url, headers={"User-Agent": "vat-notice-updater"})
+    # 캐시 우회(?cb=고유값): GitHub 캐시(최대 5분) 때문에 옛 파일을 받지 않도록 항상 최신을 가져옴
+    sep = "&" if "?" in url else "?"
+    url = f"{url}{sep}cb={time.time_ns()}"
+    req = urllib.request.Request(
+        url, headers={"User-Agent": "vat-notice-updater", "Cache-Control": "no-cache"})
     with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
         data = r.read()
     return data if binary else data.decode("utf-8")
