@@ -36,6 +36,10 @@ def fetch(url, binary=False):
 
 
 def main():
+    # 개발(편집) 폴더 보호: 이 표시 파일이 있으면 자동 업데이트를 건너뜀.
+    # → 배포 전에 프로그램을 켜도 수정 중인 코드가 옛 버전으로 덮어써지지 않음.
+    if (HERE / "개발모드.flag").exists():
+        return
     if not CONFIG.exists():
         return
     try:
