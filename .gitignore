@@ -3,6 +3,7 @@
 안내문_출력/
 백업/
 업데이트로그.txt
+.update_sha
 server.pid
 오류로그.txt
 __pycache__/
