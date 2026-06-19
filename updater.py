@@ -51,9 +51,9 @@ def main():
         return  # 아직 배포처(GitHub 계정)가 설정되지 않음 → 조용히 통과
     base = f"https://raw.githubusercontent.com/{owner}/{repo}/{branch}/"
 
-    local_ver = VERSION_FILE.read_text(encoding="utf-8").strip() if VERSION_FILE.exists() else ""
+    local_ver = (VERSION_FILE.read_text(encoding="utf-8-sig").strip() if VERSION_FILE.exists() else "")
     try:
-        remote_ver = fetch(base + "VERSION").strip()
+        remote_ver = fetch(base + "VERSION").lstrip("﻿").strip()
     except Exception:
         return  # 인터넷이 안 되거나 저장소 없음 → 기존 버전으로 실행
     if not remote_ver or remote_ver == local_ver:
